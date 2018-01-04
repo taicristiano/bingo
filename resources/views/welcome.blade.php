@@ -120,7 +120,7 @@
         <div class="row">
             <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12 content-bingo">
                 <div class="text-center" style="margin-bottom: 20px">
-                    <img src="https://drive.google.com/uc?export=view&id=1rwv1tOAXHTUWjrhXDOgM2y_AOw1L6qFs">
+                    <img src="https://drive.google.com/uc?export=view&id=1rwv1tOAXHTUWjrhXDOgM2y_AOw1L6qFs" class="bingo-image">
                 </div>
                 <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12 table-bingo">
                     <div class="tb_number">
@@ -257,22 +257,24 @@
             </div>
         </div>
     </div>
-    <!-- <iframe src="https://www.nhaccuatui.com/mh/background/4UhjQW_4Gt" width="1" height="1" frameborder="0" allowfullscreen></iframe> -->
+    
+    <audio controls="controls" loop id="audio-background" autoplay="autoplay" style="display: none">
+        <source src="{{$audioBackground}}" type="audio/mpeg">
+      Your browser does not support the audio element.
+    </audio>
     <script>
-        /**
-         * Created by Administrator on 2017/10/19.
-         */
         'use strict';
         var project_no = '';
         var employee_no = '';
         var position = '';
         var audioElement;
         var audioBg;
+        var audioUrl = '{{$audio}}';
         $(document).ready(function () {
-            var width = $('#img_play').width();
-            var height = $('#img_play').height();
             initEvents();
-            setPosition();
+            setTimeout(function(){
+                setPosition();
+            }, 2000);
             //initControls();
         });
         $( window ).resize(function() {
@@ -281,7 +283,7 @@
         function music_bingo() {
             audioBg = document.getElementById('music_bg');
             audioElement = document.createElement('audio');
-            audioElement.setAttribute('src','/home/taitd/Desktop/XoSoMienBacNhacChuong-VA-4937390.mp3');
+            audioElement.setAttribute('src', audioUrl);
             audioElement.addEventListener('ended', function() {
                 this.play();
             }, false);
@@ -318,13 +320,14 @@
             };
         
             $(document).on('click', '#btn_play', function (e) {
+                document.getElementById('audio-background').pause();
                 var $this = $(this);
                 if ($(this).data('running')) {
                     return;
                 }
                 $(this).data('running', true);
                 $(this).attr('disabled', 'disabled');
-                // music_bingo();
+                music_bingo();
                 if(bingo.selectedNumbers.length > 89){
                     alert("All number has been generated");
                     return false;
@@ -333,6 +336,9 @@
                 $("#img_play").addClass("img_play");
         
                 setTimeout(function () {
+                    setTimeout(function () {
+                        document.getElementById('audio-background').play();
+                    }, 1000);
                     $('#btn_play').data('running', false);
                     $("#img_play").removeClass("img_play");
                     $('#btn_play').removeAttr('disabled');
@@ -347,15 +353,15 @@
                     /*$('td.cell' + random3).addClass('selected');*/
         
                     //set value to result
-                    // audioElement.pause();
-                    // audioElement.currentTime = 0;
+                    audioElement.pause();
+                    audioElement.currentTime = 0;
                    // $("audio").currentTime = 0;
                     $("#number_2").text(random1);
                     /*$("#number_2").text(random2);*/
                    /* $("#number_3").text(random3);*/
-                    // audioBg.play();
+                    audioBg.play();
         
-                }, 1000)
+                }, 5000)
             });
         
             resignNumber();
@@ -381,7 +387,6 @@
             var height = $('body').height();
             var contentHeight = $('.content-bingo').height();
             var marginTop = (height - contentHeight) / 2;
-            console.log(marginTop);
             $('.content-bingo').css('margin-top', marginTop + 'px');
 
             var heightTable = $('.table-bingo').height();

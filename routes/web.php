@@ -12,5 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+	$audio = asset('audio/Audio.mp3');
+	$audioBackground = 'https://drive.google.com/uc?export=view&id=1_-fo7LTVWWBDY3IE8RhKNnzbyTdGOcBc';
+    return view('welcome', compact('audio', 'audioBackground'));
 });
