@@ -320,13 +320,13 @@
             };
         
             $(document).on('click', '#btn_play', function (e) {
-                document.getElementById('audio-background').pause();
                 var $this = $(this);
                 if ($(this).data('running')) {
                     return;
                 }
                 $(this).data('running', true);
                 $(this).attr('disabled', 'disabled');
+                document.getElementById('audio-background').pause();
                 music_bingo();
                 if(bingo.selectedNumbers.length > 89){
                     alert("All number has been generated");
