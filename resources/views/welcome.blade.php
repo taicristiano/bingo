@@ -262,6 +262,10 @@
         <source src="{{$audioBackground}}" type="audio/mpeg">
       Your browser does not support the audio element.
     </audio>
+    <audio controls="controls" loop id="audio-play" style="display: none">
+        <source src="{{$audio}}" type="audio/mpeg">
+      Your browser does not support the audio element.
+    </audio>
     <script>
         'use strict';
         var project_no = '';
@@ -327,7 +331,9 @@
                 $(this).data('running', true);
                 $(this).attr('disabled', 'disabled');
                 document.getElementById('audio-background').pause();
-                music_bingo();
+                document.getElementById('audio-play').play();
+
+                // music_bingo();
                 if(bingo.selectedNumbers.length > 89){
                     alert("All number has been generated");
                     return false;
@@ -339,6 +345,7 @@
                     setTimeout(function () {
                         document.getElementById('audio-background').play();
                     }, 1000);
+                    document.getElementById('audio-play').pause();
                     $('#btn_play').data('running', false);
                     $("#img_play").removeClass("img_play");
                     $('#btn_play').removeAttr('disabled');
@@ -353,13 +360,13 @@
                     /*$('td.cell' + random3).addClass('selected');*/
         
                     //set value to result
-                    audioElement.pause();
-                    audioElement.currentTime = 0;
+                    // audioElement.pause();
+                    // audioElement.currentTime = 0;
                    // $("audio").currentTime = 0;
                     $("#number_2").text(random1);
                     /*$("#number_2").text(random2);*/
                    /* $("#number_3").text(random3);*/
-                    audioBg.play();
+                    // audioBg.play();
         
                 }, 5000)
             });
