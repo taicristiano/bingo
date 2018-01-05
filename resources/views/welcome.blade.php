@@ -119,7 +119,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-12 col-xs-12 content-bingo">
-                <div class="text-center" style="margin-bottom: 20px">
+                <div class="text-center" style="margin-bottom: 30px">
                     <img src="https://drive.google.com/uc?export=view&id=1rwv1tOAXHTUWjrhXDOgM2y_AOw1L6qFs" class="bingo-image">
                 </div>
                 <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12 table-bingo">
@@ -276,9 +276,7 @@
         var audioUrl = '{{$audio}}';
         $(document).ready(function () {
             initEvents();
-            setTimeout(function(){
-                setPosition();
-            }, 2000);
+            setPosition();
             //initControls();
         });
         $( window ).resize(function() {
@@ -392,7 +390,7 @@
         function setPosition()
         {
             var height = $('body').height();
-            var contentHeight = $('.content-bingo').height();
+            var contentHeight = $('.table-bingo').height() + 118;
             var marginTop = (height - contentHeight) / 2;
             $('.content-bingo').css('margin-top', marginTop + 'px');
 
